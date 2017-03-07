@@ -43,6 +43,10 @@ google.maps.event.addListener(searchBox,'places_changed', function() {
 google.maps.event.addListener(marker,'position_changed', function() {
 	var lat =	marker.getPosition().lat();
 	var lng =	marker.getPosition().lng();
-	alert("Desea guardar la ubicacion");
+
+	//alert("Desea guardar la ubicacion");
+	$('#confirModal').modal('show');
+	$('#lat').val(lat);
+	$('#lng').val(lng);
 });
 

@@ -14,10 +14,10 @@ class CreateUbicacionesTable extends Migration
     public function up()
     {
         Schema::create('ubicacion', function (Blueprint $table) {
-            $table->integer('id');
+            $table->increments('id');
             $table->integer('idUsuario');
             $table->dateTime('timeWhen');
-            $table->string('vodPostal');
+            $table->string('codPostal');
             $table->decimal('long', 10, 7);
             $table->decimal('lat', 10, 7);
             $table->string('pais');
@@ -27,8 +27,7 @@ class CreateUbicacionesTable extends Migration
             $table->string('num');
             $table->string('piso');
             $table->string('esc');
-            $table->string('Puerta');
-            $table->primary('id');
+            $table->string('puerta');
         });
     }
 
