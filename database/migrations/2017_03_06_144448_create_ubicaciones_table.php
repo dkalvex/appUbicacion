@@ -28,6 +28,7 @@ class CreateUbicacionesTable extends Migration
             $table->string('piso');
             $table->string('esc');
             $table->string('puerta');
+            $table->timestamps();
         });
     }
 

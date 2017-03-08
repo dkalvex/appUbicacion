@@ -229,6 +229,7 @@ return [
         'Maper' => Cornford\Googlmapper\Facades\MaperFacade::class,
         
         'sessionFacade' => 'App\Http\Facade\sessionFacade',
+        'ubicacionFacade' => 'App\Http\Facade\ubicacionFacade',
     ],
 
 ];

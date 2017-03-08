@@ -16,6 +16,11 @@ Route::group(['middleware' => 'login'],function()
 	Route::get('home', 'HomeController@index');
 });
 
-Route::get('home/index', 'Home\HomeController@index');
+Route::group(['middleware' => 'logout'],function()
+{
+	Route::get('home/index', 'Home\HomeController@index');
+	Route::post('ubicacion/new', 'Ubicacion\UbicacionController@saveUbicacion');
+	Route::post('ubicacion/getUbicaciones', 'Ubicacion\UbicacionController@getUbicaciones');
+});
 Route::post('login', 'login\LoginController@login');
 Route::get('logout','login\LoginController@logout');

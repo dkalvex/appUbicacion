@@ -15,31 +15,9 @@
 				</div>
 			</div>		
 			<div class="row">
-				
-				<div class="col-xs-12 col-sm-12 col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="col-xs-12 text-center">
-								<a href="#">
-									<i class="glyphicon glyphicon-record">Titulo</i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-xs-12 col-sm-12 col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="col-xs-12 text-center">
-								<a href="#">
-									<i class="glyphicon glyphicon-record">Titulo</i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				
+				<div class='alert alert-success' id="alert_model" style="display:none"></div>
+			</div>
+			<div class="row pre-scrollable"  id="container_ubicaciones"> 				
 			</div>			
 		</div>
 
@@ -50,64 +28,81 @@
 			<div class="map" id="map"></div>
 		</div>
 
-
-		<div class="modal fade" id="formUbicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-			<div class="modal-dialog" role="document">
+		<div id="formUbicacion" class="modal fade" role="dialog">
+			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header text-center">
-						Nueva Ubicacion
-					</div>
-					<div class="modal-body">
-						<form role="form" method="POST" action="{{ url('/ubucacion/newSave') }}" class="form-horizontal">
-							<div class="form-grup">
-								<label>Codigo Postal</label>
-								<input type="text" class="form-control input-sm" name="codPostal">
+					<form role="form" method="POST" id="ubicacionForm" class="form-horizontal">
+						<div class="modal-header text-center">
+							Nueva Ubicacion
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Codigo Postal</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm " name="codPostal" id="codPostal">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Pais</label>
-								<input type="text" class="form-control input-sm" name="pais">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Pais</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm" name="pais" id="pais">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Comunidad</label>
-								<input type="text" class="form-control input-sm" name="comunidad">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Comunidad</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm " name="comunidad" id="comunidad">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Ciudad</label>
-								<input type="text" class="form-control input-sm" name="ciudad">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Ciudad</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm " name="ciudad" id="ciudad">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Direccion</label>
-								<input type="text" class="form-control input-sm" name="direccion">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Direccion</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm" name="direccion" id="direccion">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Num</label>
-								<input type="text" class="form-control input-sm" name="num">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Num</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm" name="num" id="num">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Piso</label>
-								<input type="text" class="form-control input-sm" name="piso">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Piso</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm" name="piso" id="piso">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Esc</label>
-								<input type="text" class="form-control input-sm" name="esc">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Esc</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm" name="esc" id="esc">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Puerta</label>
-								<input type="text" class="form-control input-sm" name="puerta">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4">Puerta</label>
+								<div class="col-xs-12 col-md-8">
+									<input type="text" class="form-control input-sm" name="puerta" id="puerta">
+								</div>
 							</div>
-							<div class="form-grup">
-								<label>Latitud</label>
-								<input type="text" class="form-control input-sm" name="lat" id="lat">
-							</div>
-							<div class="form-grup">
-								<label>Longitud</label>
-								<input type="text" class="form-control input-sm" name="long" id="lng">
-							</div>
-						</form>
-					</div>
+							<input type="hidden" name="token" id="token" value="{{ csrf_token() }}">
+							<input type="hidden" class="form-control input-sm" name="lat"  id="lat">
+							<input type="hidden" class="form-control input-sm" name="long" id="lng">
+						</div>
+						<div class="modal-footer">
+							<button id="guardar" onClick="saveUbicacion();" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+							<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
+
 
 		<div id="confirModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -128,19 +123,11 @@
 
 			</div>
 		</div>
-
-		<!--<form role="form" method="POST" action="{{ url('/ubucacion/newSave') }}" class="form-horizontal">
-			<div class="form-grup">
-				<input type="text" class="form-control input-sm" name="lat">
-			</div>
-			<div class="form-grup">
-				<input type="text" class="form-control input-sm" name="lat">
-			</div>
-		</form>-->
-
 	</div>
 </div>
+
 @endsection
 @section('scripts')
 <script src="{{ asset('/js/maps.js') }}"></script>
+<script src="{{ asset('/js/ubicaciones.js') }}"></script>
 @endsection
