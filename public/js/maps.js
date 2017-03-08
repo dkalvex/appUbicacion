@@ -42,6 +42,8 @@ google.maps.event.addListener(searchBox,'places_changed', function() {
 google.maps.event.addListener(marker,'position_changed', function() {
 	var alert = $("#alert_model");
 	alert.css('display','none');
+	alert.empty();
+	
 	var lat =	marker.getPosition().lat();
 	var lng =	marker.getPosition().lng();
 

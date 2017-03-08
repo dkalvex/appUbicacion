@@ -1,5 +1,5 @@
 getUbicaciones();
-$("#container_ubicaciones").css("max-height",($(document).height()-80))
+$("#container_ubicaciones").css("max-height",($(document).height()-160))
 function getUbicaciones() {
 	$.ajax({
 		url: '/ubicacion/getUbicaciones',
@@ -43,6 +43,7 @@ function loadUbicacion(lat,long) {
 	console.log(lat+" , "+long)
 	var alert = $("#alert_model");
 	alert.css('display','none');
+	alert.empty();
 }
 function saveUbicacion() {
 	var codPostal = $('#codPostal');
@@ -57,6 +58,7 @@ function saveUbicacion() {
 	var token = $('#token');
 	var lat = $('#lat');
 	var lng = $('#lng');
+
 	$.ajax({
 		url: '/ubicacion/new',
 		type: "post",
@@ -88,3 +90,22 @@ function saveUbicacion() {
 		}
 	}); 	
 }
+$("#ubicacionForm").submit(function( event ) {
+  saveUbicacion();
+  $("#formUbicacion").modal('toggle');;
+  event.preventDefault();
+});
+
+/*function validateForm(id){
+	$(‘#register’).submit(function(e) {
+	e.preventDefault();
+		debug: false,
+	}).validate({
+		rules: {
+
+		},
+		messages: {
+
+		}
+	});
+}*/

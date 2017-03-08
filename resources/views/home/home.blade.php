@@ -14,11 +14,11 @@
 					</a>
 				</div>
 			</div>		
+			<div class="row pre-scrollable"  id="container_ubicaciones"> 				
+			</div>		
 			<div class="row">
 				<div class='alert alert-success' id="alert_model" style="display:none"></div>
-			</div>
-			<div class="row pre-scrollable"  id="container_ubicaciones"> 				
-			</div>			
+			</div>	
 		</div>
 
 		<div class="col-xs-10 col-sm-10 col-md-10 map-container">
@@ -39,55 +39,55 @@
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Codigo Postal</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm " name="codPostal" id="codPostal">
+									<input type="text" required class="form-control input-sm " name="codPostal" id="codPostal">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Pais</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm" name="pais" id="pais">
+									<input type="text" required class="form-control input-sm" name="pais" id="pais">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Comunidad</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm " name="comunidad" id="comunidad">
+									<input type="text" required class="form-control input-sm " name="comunidad" id="comunidad">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Ciudad</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm " name="ciudad" id="ciudad">
+									<input type="text" required class="form-control input-sm " name="ciudad" id="ciudad">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Direccion</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm" name="direccion" id="direccion">
+									<input type="text" required class="form-control input-sm" name="direccion" id="direccion">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Num</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm" name="num" id="num">
+									<input type="text" required class="form-control input-sm" name="num" id="num">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Piso</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm" name="piso" id="piso">
+									<input type="text" required class="form-control input-sm" name="piso" id="piso">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Esc</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm" name="esc" id="esc">
+									<input type="text" required class="form-control input-sm" name="esc" id="esc">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-md-4">Puerta</label>
 								<div class="col-xs-12 col-md-8">
-									<input type="text" class="form-control input-sm" name="puerta" id="puerta">
+									<input type="text" required class="form-control input-sm" name="puerta" id="puerta">
 								</div>
 							</div>
 							<input type="hidden" name="token" id="token" value="{{ csrf_token() }}">
@@ -95,7 +95,7 @@
 							<input type="hidden" class="form-control input-sm" name="long" id="lng">
 						</div>
 						<div class="modal-footer">
-							<button id="guardar" onClick="saveUbicacion();" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+							<button id="guardar" class="btn btn-primary">Guardar</button>
 							<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
 						</div>
 					</form>
