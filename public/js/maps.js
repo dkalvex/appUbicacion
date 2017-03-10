@@ -51,5 +51,42 @@ google.maps.event.addListener(marker,'position_changed', function() {
 	$('#confirModal').modal('show');
 	$('#lat').val(lat);
 	$('#lng').val(lng);
+	var geocoder = new google.maps.Geocoder();
+	var yourLocation = new google.maps.LatLng(lat, lng);
+	geocoder.geocode({ 'latLng': yourLocation },processGeocoder);
 });
+
+function processGeocoder(results, status){
+	$('#ubicacionForm').trigger("reset");
+	var ciudad = $("#ciudad") ;
+	var comunidad = $("#comunidad") ;
+	var pais = $("#pais") ;
+
+	if (status == google.maps.GeocoderStatus.OK) {		
+
+		if (results[0]) {
+			console.log(results);
+			var postal = results[0].address_components[(results[0].address_components.length - 1)].long_name;
+			var dirComponent = results[0].address_components;
+			for (var i = (dirComponent.length - 1); i >= 0; i--) {
+				if(dirComponent[i].types[0] == "locality"){
+					ciudad.val(dirComponent[i].long_name);
+				}
+				if(dirComponent[i].types[0] == "country"){
+					pais.val(dirComponent[i].long_name);
+				}
+				if(dirComponent[i].types[0] == "neighborhood"){
+					comunidad.val(dirComponent[i].long_name);
+				}
+
+			}
+			var ub = results[0].formatted_address.split(",");
+			$("#direccion").val(ub[0]);
+			$("#codPostal").val(postal);
+		} 
+	}
+}
+function error(msg) {
+	alert(msg);
+}
 

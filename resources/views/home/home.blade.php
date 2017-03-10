@@ -13,6 +13,7 @@
 						<i class="glyphicon glyphicon-off"></i>
 					</a>
 				</div>
+				
 			</div>		
 			<div class="row pre-scrollable"  id="container_ubicaciones"> 				
 			</div>		
@@ -128,6 +129,9 @@
 
 @endsection
 @section('scripts')
+<script type="text/javascript">
+	var APP_URL = {!! json_encode(url('/')) !!};
+</script>
 <script src="{{ asset('/js/maps.js') }}"></script>
 <script src="{{ asset('/js/ubicaciones.js') }}"></script>
 @endsection

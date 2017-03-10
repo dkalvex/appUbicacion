@@ -2,7 +2,7 @@ getUbicaciones();
 $("#container_ubicaciones").css("max-height",($(document).height()-160))
 function getUbicaciones() {
 	$.ajax({
-		url: '/ubicacion/getUbicaciones',
+		url: APP_URL+'/ubicacion/getUbicaciones',
 		type: "post",
 		data: {'_token': $('#token').val()},
 		success: function(data){  
@@ -40,10 +40,17 @@ function updateDivUbicacioes(ubs){
 	};
 }
 function loadUbicacion(lat,long) {
-	console.log(lat+" , "+long)
-	var alert = $("#alert_model");
+	var alert = $("#alert_model");	
 	alert.css('display','none');
 	alert.empty();
+	var myLatlng = new google.maps.LatLng(parseFloat(lat),parseFloat(long));
+
+	var marker = new google.maps.Marker({
+		position: myLatlng,
+		map:map,
+		draggable:true
+	});
+	map.setCenter(myLatlng);
 }
 function saveUbicacion() {
 	var codPostal = $('#codPostal');
@@ -60,7 +67,7 @@ function saveUbicacion() {
 	var lng = $('#lng');
 
 	$.ajax({
-		url: '/ubicacion/new',
+		url: APP_URL+'/ubicacion/new',
 		type: "post",
 		data: {
 			'codPostal' : codPostal.val(),
@@ -91,21 +98,7 @@ function saveUbicacion() {
 	}); 	
 }
 $("#ubicacionForm").submit(function( event ) {
-  saveUbicacion();
-  $("#formUbicacion").modal('toggle');;
-  event.preventDefault();
+	saveUbicacion();
+	$("#formUbicacion").modal('toggle');;
+	event.preventDefault();
 });
-
-/*function validateForm(id){
-	$(‘#register’).submit(function(e) {
-	e.preventDefault();
-		debug: false,
-	}).validate({
-		rules: {
-
-		},
-		messages: {
-
-		}
-	});
-}*/
