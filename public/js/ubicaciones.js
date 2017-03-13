@@ -1,5 +1,6 @@
 getUbicaciones();
 $("#container_ubicaciones").css("max-height",($(document).height()-160))
+$("#container_ubicaciones").css("min-height",($(document).height()-160))
 function getUbicaciones() {
 	$.ajax({
 		url: APP_URL+'/ubicacion/getUbicaciones',

@@ -13,7 +13,7 @@ class UserTableSeeder extends Seeder
     {
 
     	$users = [
-    	['id'=>'1','nombre' => 'Daniel Galvez', 'email' => 'dkalvex@gmail.com', 'password' => \Hash::make('123456'), 'active' => 1]
+    	['nombre' => 'Antonio Jesus', 'email' => 'antoniojesus.hidalgo@gmail.com', 'password' => \Hash::make('123456'), 'active' => 1]
     	];
 
     	\DB::table('users')->insert($users);
