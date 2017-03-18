@@ -230,6 +230,7 @@ return [
         
         'sessionFacade' => 'App\Http\Facade\sessionFacade',
         'ubicacionFacade' => 'App\Http\Facade\ubicacionFacade',
+        'userFacade' => 'App\Http\Facade\userFacade',
     ],
 
 ];

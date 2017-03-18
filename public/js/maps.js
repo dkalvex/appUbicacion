@@ -61,11 +61,10 @@ function processGeocoder(results, status){
 	var ciudad = $("#ciudad") ;
 	var comunidad = $("#comunidad") ;
 	var pais = $("#pais") ;
+	var numero = $("#num") ;
 
-	if (status == google.maps.GeocoderStatus.OK) {		
-
+	if (status == google.maps.GeocoderStatus.OK) {				
 		if (results[0]) {
-			console.log(results);
 			var postal = results[0].address_components[(results[0].address_components.length - 1)].long_name;
 			var dirComponent = results[0].address_components;
 			for (var i = (dirComponent.length - 1); i >= 0; i--) {
@@ -78,6 +77,9 @@ function processGeocoder(results, status){
 				if(dirComponent[i].types[0] == "neighborhood"){
 					comunidad.val(dirComponent[i].long_name);
 				}
+				if(dirComponent[i].types[0] == "street_number"){
+					numero.val(dirComponent[i].long_name);
+				}
 
 			}
 			var ub = results[0].formatted_address.split(",");
@@ -89,4 +91,3 @@ function processGeocoder(results, status){
 function error(msg) {
 	alert(msg);
 }
-

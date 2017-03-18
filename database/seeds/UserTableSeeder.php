@@ -13,8 +13,9 @@ class UserTableSeeder extends Seeder
     {
 
     	$users = [
-    	['nombre' => 'Antonio Jesus', 'email' => 'antoniojesus.hidalgo@gmail.com', 'password' => \Hash::make('123456'), 'active' => 1]
-    	];
+    	['nombre' => 'Antonio Jesus', 'email' => 'antoniojesus.hidalgo@gmail.com', 'password' => \Hash::make('123456'), 'active' => 1],
+        ['nombre' => 'Daniel Galvez', 'email' => 'dkalvex@gmail.com', 'password' => \Hash::make('123456'), 'active' => 1]
+        ];
 
     	\DB::table('users')->insert($users);
 

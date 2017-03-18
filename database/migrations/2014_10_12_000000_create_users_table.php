@@ -19,7 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('nombre');
             $table->string('apellido')->nullable();
             $table->string('email','250');
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('id_faceboock','300')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
