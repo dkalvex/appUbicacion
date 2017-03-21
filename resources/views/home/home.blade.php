@@ -154,6 +154,10 @@
 			</div>
 		</div>
 
+		<div id="formUbicacion-edit"  class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			@include('ubicacion.edit')	
+		</div>
+
 
 		<div id="confirModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -164,11 +168,11 @@
 						<h4 class="modal-title">Ubicaciones</h4>
 					</div>
 					<div class="modal-footer">
-						<div class="fb-like" onClick="userLike()" data-href="https://www.facebook.com/UbicacionesApp" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+						<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
 						<!--<a style="margin-top: 5px" class="twitter-follow-button " data-show-count="false"
 						href="https://twitter.com/TwitterDev">
 						Follow</a>-->
-						<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal"  id="btnConfirm" data-target="#formUbicacion" disabled>Si</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal"  id="btnConfirm" data-target="#formUbicacion" >Si</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 					</div>
 				</div>

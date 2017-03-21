@@ -1,3 +1,9 @@
+var map2 = new google.maps.Map(document.getElementById('conten_map_edit'), {
+	center: {lat: -33.8688, lng: 151.2195},
+	zoom: 12,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+
 var map = new google.maps.Map(document.getElementById('map'), {
 	center: {lat: -33.8688, lng: 151.2195},
 	zoom: 13,
@@ -11,7 +17,7 @@ if (navigator.geolocation) {
 			lng: position.coords.longitude
 		};		
 		
-		map.setCenter(pos);
+		map.setCenter(pos);		
 	});
 } 
 
@@ -19,10 +25,24 @@ var marker = new google.maps.Marker({
 	map:map,
 	draggable:true
 });
+var marker2 = new google.maps.Marker({
+	map:map2,
+	draggable:true
+});
+
+map.addListener('click', function(event) {
+	addMarker(event.latLng);
+});
+
+
+function addMarker(location) {	
+	marker.setPosition(location);
+}
 
 // Se crea el input y se configura como el buscar 
 var input = document.getElementById('search_box');
 var searchBox = new google.maps.places.SearchBox(input);
+
 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 google.maps.event.addListener(searchBox,'places_changed', function() {
@@ -37,7 +57,7 @@ google.maps.event.addListener(searchBox,'places_changed', function() {
 
 	map.fitBounds(bounds);
 	map.setZoom(13);
-});	  
+});
 
 google.maps.event.addListener(marker,'position_changed', function() {
 	var alert = $("#alert_model");
