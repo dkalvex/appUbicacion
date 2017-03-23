@@ -4,7 +4,7 @@
 			<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" id="login-form">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="form-group text-center">
-					<h5>Iniciar Sesión</h5>
+					<h5 class="txt-tittle color-black">Iniciar Sesión</h5>
 				</div>
 				<div class="form-group">
 					<div class="input-group">
@@ -22,7 +22,7 @@
 					<button type="submit" class="btn btn-primary">Login</button>
 					<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();">
 					</fb:login-button>
-					<a class="btn btn-link" href="{{ url('/password/email') }}">Recordar contraseña</a>
+					<!--<a class="btn btn-link" href="{{ url('/password/email') }}">Recordar contraseña</a>-->
 					<a href="#" class="btn btn-link" data-dismiss="modal" data-toggle="modal"  data-target="#formUsuario">Registrarme</a>
 				</div>
 			</form>

@@ -4,15 +4,15 @@
 <div class="container-fluid map-container">
 	<div class="row map-container">
 		<div class="col-xs-2 col-sm-2 col-md-2" id="user_content">
-			<div class="row" style="background-color: #0A5EA8;">
-				<div class="col-xs-12 col-sm-12 col-md-12" style="height:35px;border: 2;">
-					Menu
+			<div class="row" >
+				<div class="col-xs-12 col-sm-12 col-md-12 div-menu ">
+					<label class="txt-tittle">Menu</label>
 				</div>	
 			</div>	
 			@if (\Session::get('user.nombre') != '')
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-					<label>{{ \Session::get('user.nombre') }} {{ \Session::get('user.apellido') }}</label>
+					<label class="txt-tittle color-black">{{ \Session::get('user.nombre') }} {{ \Session::get('user.apellido') }}</label>
 					<a href="{{ url('/logout') }}">
 						<i class="glyphicon glyphicon-off"></i>
 					</a>
@@ -54,6 +54,11 @@
 		</div>
 
 		<div class="col-xs-10 col-sm-10 col-md-10 map-container">
+			<div class="row margins">
+				<div class="col-xs-12 col-sm-12 col-md-12 div-menu">
+					<label class="txt-tittle">Map</label>
+				</div>	
+			</div>
 			<div class="form-grup">				
 				<input type="text" class="form-control input-sm controls pac-input" id="search_box">
 			</div>
@@ -64,7 +69,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header text-center">
-						<h5 class="modal-title" id="exampleModalLongTitle">Resgistrarme</h5>
+						<h5 class="txt-tittle color-black" id="exampleModalLongTitle">Resgistrarme</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -79,7 +84,7 @@
 				<div class="modal-content">
 					<form role="form" method="POST" id="ubicacionForm" class="form-horizontal">
 						<div class="modal-header text-center">
-							<h5 class="modal-title" id="exampleModalLongTitle">Nueva Ubicación</h5>
+							<h5 class="txt-tittle color-black" id="exampleModalLongTitle">Nueva Ubicación</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -167,7 +172,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header text-center">
-						<h5 class="modal-title" id="exampleModalLongTitle">Ubicaciones Cercanas</h5>
+						<h5 class="txt-tittle color-black" id="exampleModalLongTitle">Ubicaciones Cercanas</h5>
 						<div id="content-ubicaciones-cercanas">
 
 						</div>
@@ -181,11 +186,10 @@
 
 		<div id="confirModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
-
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Ubicaciones</h4>
+						<h4 class="modal-title txt-tittle color-black">Ubicaciones</h4>
 					</div>
 					<div class="modal-footer">
 						<div class="fb-like" data-href="https://www.facebook.com/UbicacionesApp/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>

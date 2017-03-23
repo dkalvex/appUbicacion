@@ -2,7 +2,7 @@
 validateSession();
 var ubicaciones = new Array();
 var idUsuario ;
-getUbicacionesCercanas(14,true);
+//getUbicacionesCercanas(14,true);
 // Configura el tamaño del div para las ubicaciones
 $("#container_ubicaciones").css("max-height",(($(document).height()- $("#user_content").height() - 150)))
 $("#container_ubicaciones").css("min-height",(($(document).height()- $("#user_content").height() - 150)))
@@ -157,27 +157,29 @@ function updateDivUbicaciones(id,ubs,buttons){
 		
 		var ubiDivEdit = $(document.createElement('div'));
 		ubiDivEdit.attr('class','col-xs-1 col-sm-1 col-md-1 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 text-center');
-		if(id==ubs[i].idUsuario){
-			if(buttons){
-				var link = $(document.createElement('a'));
-				link.attr("href", '#');			
-				link.attr("onClick", 'editUbicacion("'+ubiValues+'")');
-				link.append("<i class='glyphicon glyphicon-pencil'></i>");
-				ubiDivEdit.append(link);
-			}
-
+		
+		if(buttons){
 			var link = $(document.createElement('a'));
-			link.attr("href", '#');
-			link.attr("onClick", 'deleteUbicacion("'+ubs[i].id+'")');
-			link.append("<i class='glyphicon glyphicon-remove'></i>");
+			link.attr("href", '#');			
+			link.attr("onClick", 'editUbicacion("'+ubiValues+'")');
+			link.append("<i class='glyphicon glyphicon-pencil'></i>");
 			ubiDivEdit.append(link);
 		}
+
+		var link = $(document.createElement('a'));
+		link.attr("href", '#');
+		link.attr("onClick", 'deleteUbicacion("'+ubs[i].id+'")');
+		link.append("<i class='glyphicon glyphicon-remove'></i>");
+		ubiDivEdit.append(link);
 		
+
 		ubiDiv2.append(ubiDiv3);
-		ubiDiv2.append(ubiDivEdit);
+		if(id==ubs[i].idUsuario){
+			ubiDiv2.append(ubiDivEdit);
+		}
 		ubiDiv1.append(ubiDiv2);
 		ubi.append(ubiDiv1);
-		
+
 		container_modules.append(ubi);
 	};
 }

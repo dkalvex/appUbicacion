@@ -2,7 +2,7 @@
 	<div class="modal-content">
 		<form role="form" method="POST" id="ubicacionForm-edit" class="form-horizontal">
 			<div class="modal-header text-center">
-				<h5 class="modal-title" id="exampleModalLongTitle">Editar Ubicación</h5>
+				<h5 class="modal-title txt-tittle color-black" id="exampleModalLongTitle">Editar Ubicación</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>

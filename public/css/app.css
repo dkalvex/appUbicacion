@@ -4,7 +4,7 @@
       	padding: 0;
       }
       .map {
-      	height: 100%;
+      	height: 95%;
       }
       .controls {
       	margin-top: 10px;
@@ -35,3 +35,27 @@
       .pac-container {
       	font-family: Roboto;
       }
+      .div-menu{
+            background-color: #127DDC;
+            height:35px;
+      }
+      .div-menu{
+            background-color: #1B90F8;
+            height:5%;
+      }
+      .txt-tittle{
+            font-family: 'Open Sans Condensed', sans-serif;
+            color: #FFFFFF;
+            font-size: 24px;
+            line-height: 2;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+      }
+      .margins{
+           margin-left: 1px; 
+           margin-right: 1px;
+     }
+     .color-black{
+      color:#000000;
+     }
