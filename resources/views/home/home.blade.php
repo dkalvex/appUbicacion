@@ -4,7 +4,11 @@
 <div class="container-fluid map-container">
 	<div class="row map-container">
 		<div class="col-xs-2 col-sm-2 col-md-2" id="user_content">
-
+			<div class="row" style="background-color: #0A5EA8;">
+				<div class="col-xs-12 col-sm-12 col-md-12" style="height:35px;border: 2;">
+					Menu
+				</div>	
+			</div>	
 			@if (\Session::get('user.nombre') != '')
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -139,7 +143,7 @@
 											<input type="text" required class="form-control input-sm" name="puerta" id="puerta">
 										</div>
 									</div>
-									<input type="hidden" name="token" id="token" value="{{ csrf_token() }}">
+									<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 									<input type="hidden" class="form-control input-sm" name="lat"  id="lat">
 									<input type="hidden" class="form-control input-sm" name="long" id="lng">
 								</div>
@@ -159,6 +163,22 @@
 		</div>
 
 
+		<div id="formUbicacion-cercanas"  class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h5 class="modal-title" id="exampleModalLongTitle">Ubicaciones Cercanas</h5>
+						<div id="content-ubicaciones-cercanas">
+
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div id="confirModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
@@ -168,11 +188,11 @@
 						<h4 class="modal-title">Ubicaciones</h4>
 					</div>
 					<div class="modal-footer">
-						<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+						<div class="fb-like" data-href="https://www.facebook.com/UbicacionesApp/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
 						<!--<a style="margin-top: 5px" class="twitter-follow-button " data-show-count="false"
 						href="https://twitter.com/TwitterDev">
 						Follow</a>-->
-						<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal"  id="btnConfirm" data-target="#formUbicacion" >Si</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal"  id="btnConfirm" data-target="#formUbicacion" disabled>Si</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 					</div>
 				</div>
@@ -187,6 +207,8 @@
 <script type="text/javascript">
 	var APP_URL = {!! json_encode(url('/')) !!};
 </script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+async defer></script>
 <script src="{{ asset('/js/maps.js') }}"></script>
 <script src="{{ asset('/js/ubicaciones.js') }}"></script>
 @endsection

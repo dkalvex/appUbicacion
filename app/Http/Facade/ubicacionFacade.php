@@ -13,10 +13,29 @@ class ubicacionFacade extends Facade{
 		return $ubs;
 	}
 
+	public static function getUbicacionesCercanas($request)
+	{
+		$ubs = array();
+		$ubs = DB::select("call appubicacion.ubicacionesCercanas(?)",[$request->input("idUbicacion")]);
+		
+		return $ubs;
+	}
+
+	public static function daleteUbicaciones($request)
+	{
+		$ubi = Ubicaciones::find($request->input("idUbicacion"));
+		$ubi->delete();
+	}
+
 	public static function saveUbicacion($request)
 	{		
-		$ub = new Ubicaciones;
 		$date = date('Y-m-d H:i:s');
+		$id = $request->input("idUbicacion");
+		if($id!="" && $id!=null){
+			$ub = Ubicaciones::find($request->input("idUbicacion"));
+		}else{
+			$ub = new Ubicaciones;
+		};			
 		$ub->codPostal = $request->input('codPostal');
 		$ub->pais = $request->input('pais');
 		$ub->comunidad = $request->input('comunidad');
@@ -27,9 +46,10 @@ class ubicacionFacade extends Facade{
 		$ub->esc = $request->input('esc');
 		$ub->puerta = $request->input('puerta');
 		$ub->lat = $request->input('lat');
-		$ub->long = $request->input('lng');
+		$ub->long = $request->input('long');
 		$ub->idUsuario = $request->session()->get('user.id');
 		$ub->timeWhen = $date;
-		$ub->save();		
+		$ub->save();
+		return $ub->id;
 	}
 }

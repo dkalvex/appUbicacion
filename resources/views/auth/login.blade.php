@@ -5,19 +5,6 @@
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="form-group text-center">
 					<h5>Iniciar Sesión</h5>
-					<?php 						
-					if(count($errors) > 0){
-
-						echo "<div class='alert alert-danger'>
-						<strong>Whoops!</strong> There were some problems with your input.<br><br>
-						<ul>";
-							foreach($errors as $error){
-								echo "<li>". $error ."</li>";
-							}
-							echo"</ul>
-						</div>";
-					}
-					?>
 				</div>
 				<div class="form-group">
 					<div class="input-group">
@@ -37,9 +24,6 @@
 					</fb:login-button>
 					<a class="btn btn-link" href="{{ url('/password/email') }}">Recordar contraseña</a>
 					<a href="#" class="btn btn-link" data-dismiss="modal" data-toggle="modal"  data-target="#formUsuario">Registrarme</a>
-				</div>
-				<div class="form-group">
-					
 				</div>
 			</form>
 		</div>

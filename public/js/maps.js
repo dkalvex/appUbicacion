@@ -23,17 +23,26 @@ if (navigator.geolocation) {
 
 var marker = new google.maps.Marker({
 	map:map,
-	draggable:true
+	draggable:false
 });
+
 var marker2 = new google.maps.Marker({
 	map:map2,
-	draggable:true
+	draggable:false
 });
 
 map.addListener('click', function(event) {
 	addMarker(event.latLng);
 });
 
+map2.addListener('click', function(event) {
+	addMarker2(event.latLng);
+});
+
+
+function addMarker2(location) {	
+	marker2.setPosition(location);
+}
 
 function addMarker(location) {	
 	marker.setPosition(location);
@@ -74,6 +83,14 @@ google.maps.event.addListener(marker,'position_changed', function() {
 	var geocoder = new google.maps.Geocoder();
 	var yourLocation = new google.maps.LatLng(lat, lng);
 	geocoder.geocode({ 'latLng': yourLocation },processGeocoder);
+});
+
+google.maps.event.addListener(marker2,'position_changed', function() {	
+	var lat =	marker2.getPosition().lat();
+	var lng =	marker2.getPosition().lng();
+	
+	$("#lat-edit").val(lat);
+	$("#lng-edit").val(lng);
 });
 
 function processGeocoder(results, status){
