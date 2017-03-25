@@ -17,13 +17,7 @@
 						<i class="glyphicon glyphicon-off"></i>
 					</a>
 				</div>
-			</div>	
-			@else
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12">
-					@include('auth.login')
-				</div>	
-			</div>		
+			</div>
 			@endif				
 
 			<div class="row pre-scrollable"  id="container_ubicaciones"> 			
@@ -56,7 +50,16 @@
 		<div class="col-xs-10 col-sm-10 col-md-10 map-container">
 			<div class="row margins">
 				<div class="col-xs-12 col-sm-12 col-md-12 div-menu">
-					<label class="txt-tittle">Map</label>
+					<div class="row">
+						<div class="col-xs-2 col-sm-2 col-md-2">
+							<label class="txt-tittle">Map</label>
+						</div>
+						@if (\Session::get('user.nombre') == '' or \Session::get('user.nombre') == null)
+						<div class="col-xs-10 col-sm-10 col-md-10">
+							@include('auth.login')
+						</div>	
+						@endif
+					</div>
 				</div>	
 			</div>
 			<div class="form-grup">				
@@ -75,6 +78,20 @@
 						</button>
 					</div>
 					@include('user.new')
+				</div>
+			</div>
+		</div>
+
+		<div id="formUsuarioPsd"  class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h5 class="txt-tittle color-black" id="exampleModalLongTitle">Recuperar contraseña</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					@include('auth.reset')
 				</div>
 			</div>
 		</div>

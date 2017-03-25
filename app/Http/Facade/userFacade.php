@@ -20,12 +20,18 @@ class userFacade extends Facade{
 	
 	public static function saveUserFaceboock($request)
 	{
-		$user= array();
 		$user = DB::table('users')->where('users.email', $request->input('email'))->get();
 		if(count($user)>0){
-			$user->nombre = $request->input('nombre');
-			$user->id_faceboock = $request->input('id');
-			$user->save();
+			echo $user;	
+			
+			DB::table('users')
+			->where('email', $request->input('email'))
+			->update(['id_faceboock' => $request->input('id')]);
+
+			$request->session()->put('user.id',$user[0]->id);
+			$request->session()->put('user.nombre',$user[0]->nombre);
+			$request->session()->put('user.apellido',$user[0]->apellido);
+
 		}else{
 			$user = new User;
 			$user->nombre = $request->input('nombre');
@@ -33,11 +39,12 @@ class userFacade extends Facade{
 			$user->active = 1;
 			$user->id_faceboock = $request->input('id');	
 			$user->save();
+
+			$request->session()->put('user.id',$user->id);
+			$request->session()->put('user.nombre',$user->nombre);
+			$request->session()->put('user.apellido',$user->apellido);
+
 		}
-		
-		$request->session()->put('user.id',$user->id);
-		$request->session()->put('user.nombre',$user->nombre);
-		$request->session()->put('user.apellido',$user->apellido);
 	}
 
 	public static function saveUser($request)
@@ -55,7 +62,6 @@ class userFacade extends Facade{
 			$user->password = $request->input('password');
 			$user->save();
 		}
-		
 		$request->session()->put('user.id',$user->id);
 		$request->session()->put('user.nombre',$user->nombre);
 		$request->session()->put('user.apellido',$user->apellido);
