@@ -1,8 +1,10 @@
-var map2 = new google.maps.Map(document.getElementById('conten_map_edit'), {
+var editMap = false;
+var getL = false;
+/*var map2 = new google.maps.Map(document.getElementById('conten_map_edit'), {
 	center: {lat: -33.8688, lng: 151.2195},
 	zoom: 12,
 	mapTypeId: google.maps.MapTypeId.ROADMAP
-});
+});*/
 
 var map = new google.maps.Map(document.getElementById('map'), {
 	center: {lat: -33.8688, lng: 151.2195},
@@ -26,26 +28,27 @@ var marker = new google.maps.Marker({
 	draggable:false
 });
 
-var marker2 = new google.maps.Marker({
+/*var marker2 = new google.maps.Marker({
 	map:map2,
 	draggable:false
-});
+});*/
 
 map.addListener('click', function(event) {
 	addMarker(event.latLng);
 });
 
-map2.addListener('click', function(event) {
+/*map2.addListener('click', function(event) {
 	addMarker2(event.latLng);
-});
+});*/
 
 
-function addMarker2(location) {	
+/*function addMarker2(location) {	
 	marker2.setPosition(location);
-}
+}*/
 
 function addMarker(location) {	
 	marker.setPosition(location);
+	map.setCenter(location);
 }
 
 // Se crea el input y se configura como el buscar 
@@ -75,23 +78,31 @@ google.maps.event.addListener(marker,'position_changed', function() {
 	
 	var lat =	marker.getPosition().lat();
 	var lng =	marker.getPosition().lng();
+	if(editMap && getL){
+		$('#lat-edit').val(lat);
+		$('#lng-edit').val(lng);
+		$('#formUbicacion-edit').modal('show');
+		getL = false;
+	}
 
-	//alert("Desea guardar la ubicacion");
-	$('#confirModal').modal('show');
-	$('#lat').val(lat);
-	$('#lng').val(lng);
-	var geocoder = new google.maps.Geocoder();
-	var yourLocation = new google.maps.LatLng(lat, lng);
-	geocoder.geocode({ 'latLng': yourLocation },processGeocoder);
+	if(!editMap){
+		$('#confirModal').modal('show');
+		$('#lat').val(lat);
+		$('#lng').val(lng);
+		var geocoder = new google.maps.Geocoder();
+		var yourLocation = new google.maps.LatLng(lat, lng);
+		geocoder.geocode({ 'latLng': yourLocation },processGeocoder);	
+	}
+	
 });
 
-google.maps.event.addListener(marker2,'position_changed', function() {	
+/*google.maps.event.addListener(marker2,'position_changed', function() {	
 	var lat =	marker2.getPosition().lat();
 	var lng =	marker2.getPosition().lng();
 	
 	$("#lat-edit").val(lat);
 	$("#lng-edit").val(lng);
-});
+});*/
 
 function processGeocoder(results, status){
 	$('#ubicacionForm').trigger("reset");

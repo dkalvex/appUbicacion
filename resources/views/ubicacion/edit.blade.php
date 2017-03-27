@@ -9,7 +9,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-				<input type="hidden" name="idUbicacion" id="idUbicacion">
+					<input type="hidden" name="idUbicacion" id="idUbicacion">
 					<div class="col-xs-6 col-sm-6 col-md-6">
 						<div class="form-group">
 							<label class="col-xs-12 col-md-4">Codigo Postal</label>
@@ -69,20 +69,20 @@
 						</div>
 						<input type="hidden" name="_token" id="token-edit" value="{{ csrf_token() }}">
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12">
-						<div id="conten_map_edit" style="height: 250px"></div>
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="col-xs-5 col-sm-5 col-md-5">
 						<label class="col-xs-12 col-md-4">Latitud</label>
 						<div class="col-xs-12 col-md-8">
 							<input type="text" class="form-control input-sm" name="lat"  id="lat-edit" readonly="readonly">
 						</div>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="col-xs-5 col-sm-5 col-md-5">
 						<label class="col-xs-12 col-md-4">Longitud</label>
 						<div class="col-xs-12 col-md-8">
 							<input type="text" class="form-control input-sm" name="long" id="lng-edit" readonly="readonly">
 						</div>
+					</div>
+					<div class="col-xs-2 col-sm-2 col-md-2">
+						<input type="button" class="btn btn-default" id="btUpdateL" value="Actualizar">
 					</div>
 				</div>
 			</div>

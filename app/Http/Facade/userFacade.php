@@ -21,8 +21,7 @@ class userFacade extends Facade{
 	public static function saveUserFaceboock($request)
 	{
 		$user = DB::table('users')->where('users.email', $request->input('email'))->get();
-		if(count($user)>0){
-			echo $user;	
+		if(count($user)>0){	
 			
 			DB::table('users')
 			->where('email', $request->input('email'))
@@ -66,5 +65,18 @@ class userFacade extends Facade{
 		$request->session()->put('user.nombre',$user->nombre);
 		$request->session()->put('user.apellido',$user->apellido);
 		return "Su usuario ha sido registrado";
+	}
+
+	public static function resetPsd($request)
+	{
+		$user= array();
+		$user = DB::table('users')->where('users.email', $request->input('email'))->get();
+		if(count($user)>0){
+			DB::table('users')
+			->where('email', $request->input('email'))
+			->update(['password' => \Hash::make($request->input('password'))]);
+			return "true";
+		}
+		return "false";
 	}
 }

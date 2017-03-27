@@ -1,6 +1,8 @@
 @extends('app')
 
 @section('content')
+<meta property="og:url" content="https://www.facebook.com/UbicacionesApp/" />
+<meta property="og:type" content="website" />
 <div class="container-fluid map-container">
 	<div class="row map-container">
 		<div class="col-xs-2 col-sm-2 col-md-2" id="user_content">
@@ -208,8 +210,11 @@
 					<div class="modal-header">
 						<h4 class="modal-title txt-tittle color-black">Ubicaciones</h4>
 					</div>
+					<div class="modal-body" class="modal-body">
+						<p>Desea guardar la ubicación?</p>
+					</div>
 					<div class="modal-footer">
-						<div class="fb-like" data-href="https://www.facebook.com/UbicacionesApp/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+						<div class="fb-like" data-href="https://www.facebook.com/UbicacionesApp" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
 						<!--<a style="margin-top: 5px" class="twitter-follow-button " data-show-count="false"
 						href="https://twitter.com/TwitterDev">
 						Follow</a>-->

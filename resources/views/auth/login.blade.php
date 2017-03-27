@@ -4,7 +4,7 @@
 			<form class="form-horizontal margin-form" role="form" method="POST" action="{{ url('/login') }}" id="login-form">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="form-group">
-					<div class="col-xs-4 col-sm-4 col-md-4 center-vertical">
+					<div class="col-xs-4 col-sm-4 col-md-4 center-vertical text-right">
 						<a class="txt-content" href="#" data-dismiss="modal" data-toggle="modal" data-target="#formUsuarioPsd">¿Olvido su contraseña?</a>
 						<a href="#" class="txt-content" data-dismiss="modal" data-toggle="modal"  data-target="#formUsuario">Registrarme</a>
 					</div>
@@ -31,4 +31,3 @@
 	</div>
 </div>
 </div>
-

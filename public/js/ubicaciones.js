@@ -12,10 +12,17 @@ var onloadCallback = function() {
 		'sitekey' : '6Ldg7RkUAAAAAAMqUqy6UVhb3qRwg1d6WyYTBNDm',
 		'callback' : verifyCallback,
 	});
+	widgetId1 = grecaptcha.render('html_element2', {
+		'sitekey' : '6Ldg7RkUAAAAAAMqUqy6UVhb3qRwg1d6WyYTBNDm',
+		'callback' : verifyCallback2,
+	});
 };
 
 function verifyCallback(response){
 	$("#btnGuardarUser").removeAttr("disabled");
+}
+function verifyCallback2(response){
+	$("#btnResetPsd").removeAttr("disabled");
 }
 
 function getUbicacionesCercanas(id,form){
@@ -92,20 +99,51 @@ function validateSession() {
 	}); 
 }
 
+$("#resetPsdForm").submit(function( event ) {
+	event.preventDefault();
+	var valueForm = $("#resetPsdForm").serializeArray();
+	
+	if(valueForm[2].value == valueForm[1].value){
+		$.ajax({
+			url: APP_URL+'/user/resetPsd',
+			type: "post",
+			data: {
+				"_token":valueForm[3].value,
+				"password":valueForm[1].value,
+				"email":valueForm[0].value
+			},
+			success: function(data){
+				if(data){
+					alertShow("#alert_model","La contraseña fue editada correctamente");
+				}else{
+					alertShow("#alert_model","El usuario no esta registrado");
+				}
+				$("#formUsuarioPsd").modal('toggle');
+			},
+			error: function(xhr, textStatus, errorThrown){
+				alertShow("#alert_model_rest_psd","Error al tratar de procesar la informacion");
+			}
+		});
+
+	}else{
+		alertShow("#alert_model_rest_psd","Las contraseñas no coinciden");
+	}
+});
+
 $("#ubicacionForm").submit(function( event ) {
 	event.preventDefault();
 	var valueForm = $("#ubicacionForm").serializeArray();
 	saveUbicacion(valueForm);
 	$("#formUbicacion").modal('toggle');
-	
+
 });
 
 $("#ubicacionForm-edit").submit(function( event ) {
 	event.preventDefault();
 	var valueForm = $("#ubicacionForm-edit").serializeArray();
 	saveUbicacion(valueForm);
-	$("#formUbicacion-edit").modal('toggle');;
-	
+	$("#formUbicacion-edit").modal('toggle');
+
 });
 
 function getUbicaciones(idUser) {
@@ -122,7 +160,7 @@ function getUbicaciones(idUser) {
 	}else{		
 		updateDivUbicaciones(0,ubicaciones,false);
 	}
-	
+
 }
 
 $('#btnConfirm').click(function () {
@@ -154,10 +192,10 @@ function updateDivUbicaciones(id,ubs,buttons){
 		link.attr("onClick", 'loadUbicacion("'+ubs[i].id+'","'+ubs[i].lat+'","'+ubs[i].long+'")');
 		link.append("<i class='glyphicon glyphicon-record'>"+ubs[i].direccion+"</i>");
 		ubiDiv3.append(link);
-		
+
 		var ubiDivEdit = $(document.createElement('div'));
 		ubiDivEdit.attr('class','col-xs-1 col-sm-1 col-md-1 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 text-center');
-		
+
 		if(buttons){
 			var link = $(document.createElement('a'));
 			link.attr("href", '#');			
@@ -171,7 +209,7 @@ function updateDivUbicaciones(id,ubs,buttons){
 		link.attr("onClick", 'deleteUbicacion("'+ubs[i].id+'")');
 		link.append("<i class='glyphicon glyphicon-remove'></i>");
 		ubiDivEdit.append(link);
-		
+
 
 		ubiDiv2.append(ubiDiv3);
 		if(id==ubs[i].idUsuario){
@@ -184,11 +222,16 @@ function updateDivUbicaciones(id,ubs,buttons){
 	};
 }
 
-$("#formUbicacion-edit").on("shown.bs.modal", function () {
+/*$("#formUbicacion-edit").on("shown.bs.modal", function () {
 	var currentCenter = map2.getCenter();  
 	google.maps.event.trigger(map2, "resize");
 	map2.setCenter(currentCenter); 
-});
+});*/
+
+$('#btUpdateL').click(function () {
+	getL = true;
+	$("#formUbicacion-edit").modal('toggle');
+})
 
 function editUbicacion(ubi){
 	var i = 0, strLength = ubi.length;
@@ -213,9 +256,10 @@ function editUbicacion(ubi){
 
 	$('#formUbicacion-edit').modal('show');
 	var myLatlng = new google.maps.LatLng(parseFloat(ubi.lat),parseFloat(ubi.long));
-	
-	marker2.setPosition(myLatlng);
-	map2.setCenter(myLatlng);
+	editMap = true;
+	marker.setPosition(myLatlng);
+	map.setCenter(myLatlng);
+	map.panBy(0, -150);
 }
 function deleteUbicacion(id){
 	$.ajax({
@@ -231,15 +275,6 @@ function deleteUbicacion(id){
 	});
 }
 function loadUbicacion(id,lat,long) {
-	var alert = $("#alert_model");	
-	alert.css('display','none');
-	alert.empty();
-	var alert = $("#alert_model1");	
-	alert.css('display','none');
-	alert.empty();
-	var alert = $("#alert_model2");	
-	alert.css('display','none');
-	alert.empty();
 	var myLatlng = new google.maps.LatLng(parseFloat(lat),parseFloat(long));
 
 	var marker = new google.maps.Marker({
@@ -258,13 +293,7 @@ function saveUbicacion(data) {
 			type: "post",
 			data: data,
 			success: function(data){
-				var alert = $("#alert_model");
-				var content = $(document.createElement('ul'));
-				var msj = $(document.createElement('li'));
-				msj.append('La ubicación fue guardada exitosamente');
-				content.append(msj);
-				alert.append(content);
-				alert.css('display','block');
+				alertShow("#alert_model","La ubicación fue guardada exitosamente");
 				validateSession();
 				getUbicacionesCercanas(data,true);	             
 			}
@@ -315,33 +344,32 @@ function saveUbicacion(data) {
 }(document, "script", "twitter-wjs"));
 
 FB.init({
-	appId  : '1781023458590327',
-	status : true, 
+	appId  : '1781023458590327', 
 	xfbml  : true,
 });
 
-FB.getLoginStatus(function(response) {
+FB.getLoginStatus(function(response) {	
 	if (response.status=='connected') {
-		FB.api("/me/likes/"+344130499316279 ,function (response) {
-			if(response.error){
+		FB.api("/me/likes/344130499316279" ,function (like) {
+			if(like.error){
 				return false;
 			}
-			if (response) {						
+			if (like) {						
 				$('#btnConfirm').attr('disabled','disabled');
-				if(response.data!=''){
+				if(like.data!=''){
 					$('#btnConfirm').removeAttr('disabled');
 				}										
 			}
 		});
 	}else if (response.status == 'not_authorized'){
-		FB.login(function(response) {
-			FB.api("/me/likes/"+344130499316279 ,function (response) {
-				if(response.error){
+		FB.login(function(like) {
+			FB.api("/me/likes/344130499316279" ,function (like) {
+				if(like.error){
 					return false;
 				}
-				if (response) {						
+				if (like) {						
 					$('#btnConfirm').attr('disabled','disabled');
-					if(response.data!=''){
+					if(like.data!=''){
 						$('#btnConfirm').removeAttr('disabled');
 					}										
 				}
@@ -387,4 +415,30 @@ function checkLoginState() {
 			});
 		}
 	});
+};
+
+function alertShow(id,mesj){
+	var alert = $(id);
+	var content = $(document.createElement('ul'));
+	var msj = $(document.createElement('li'));
+	msj.append(mesj);
+	content.append(msj);
+	alert.append(content);
+	alert.css('display','block');
+	autoClosingAlert(id,5000);
 }
+
+function autoClosingAlert(selector, delay) {
+	var alert = $(selector).alert();
+	window.setTimeout(function() { alert.css('display','none'); alert.empty(); }, delay);
+};
+
+$("#alert_model1").ready(function (){
+	var alert = $("#alert_model1").alert();
+	window.setTimeout(function() { alert.css('display','none'); alert.empty(); }, 5000);
+});
+
+$("#alert_model2").ready(function (){
+	var alert = $("#alert_model2").alert();
+	window.setTimeout(function() { alert.css('display','none'); alert.empty(); }, 5000);
+});

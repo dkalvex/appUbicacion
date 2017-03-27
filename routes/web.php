@@ -16,6 +16,7 @@ Route::get('home', 'HomeController@index');
 Route::get('home/index', 'Home\HomeController@index');
 Route::post('user/faceboock', 'User\NewController@index');
 Route::post('user/newSave', 'User\NewController@saveUser');
+Route::post('user/resetPsd', 'User\NewController@resetPsd');
 Route::post('ubicacion/new', 'Ubicacion\UbicacionController@saveUbicacion');
 Route::post('ubicacion/getUbicaciones', 'Ubicacion\UbicacionController@getUbicaciones');
 Route::post('ubicacion/daleteUbicaciones', 'Ubicacion\UbicacionController@deleteUbicacion');

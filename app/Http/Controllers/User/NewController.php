@@ -34,5 +34,17 @@ class NewController extends Controller
 			array_push($error,"Ocurrio un error al guardar información");
 			return redirect('home/home')->with('errors',$error);
 		}	
+	}
+
+	public function resetPsd(Request $request)
+	{
+		$error = array();
+		try{
+			$status = \userFacade::resetPsd($request);
+			return $status;	
+		}catch(Exception $e){
+			array_push($error,"Ocurrio un error al guardar información");
+			return $error;
+		}
 	}	
 }
