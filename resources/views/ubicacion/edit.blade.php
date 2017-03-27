@@ -26,7 +26,7 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-md-4">Comunidad</label>
 							<div class="col-xs-12 col-md-8">
-								<input type="text" required class="form-control input-sm " name="comunidad" id="comunidad-edit">
+								<input type="text" class="form-control input-sm " name="comunidad" id="comunidad-edit">
 							</div>
 						</div>									
 						<div class="form-group">
@@ -52,19 +52,19 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-md-4">Piso</label>
 							<div class="col-xs-12 col-md-8">
-								<input type="text" required class="form-control input-sm" name="piso" id="piso-edit">
+								<input type="text" class="form-control input-sm" name="piso" id="piso-edit">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-12 col-md-4">Esc</label>
 							<div class="col-xs-12 col-md-8">
-								<input type="text" required class="form-control input-sm" name="esc" id="esc-edit">
+								<input type="text" class="form-control input-sm" name="esc" id="esc-edit">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-12 col-md-4">Puerta</label>
 							<div class="col-xs-12 col-md-8">
-								<input type="text" required class="form-control input-sm" name="puerta" id="puerta-edit">
+								<input type="text" class="form-control input-sm" name="puerta" id="puerta-edit">
 							</div>
 						</div>
 						<input type="hidden" name="_token" id="token-edit" value="{{ csrf_token() }}">
@@ -88,7 +88,7 @@
 			</div>
 			<div class="modal-footer">
 				<button id="guardar" class="btn btn-primary">Guardar</button>
-				<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button class="btn btn-default" id="btnCerrarEditUb" data-dismiss="modal">Cerrar</button>
 			</div>
 		</form>
 	</div>

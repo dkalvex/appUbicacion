@@ -35,7 +35,8 @@ class ubicacionFacade extends Facade{
 			$ub = Ubicaciones::find($request->input("idUbicacion"));
 		}else{
 			$ub = new Ubicaciones;
-		};			
+		};
+
 		$ub->codPostal = $request->input('codPostal');
 		$ub->pais = $request->input('pais');
 		$ub->comunidad = $request->input('comunidad');

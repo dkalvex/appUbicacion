@@ -28,11 +28,9 @@ class NewController extends Controller
 		$message = array();
 		try{
 			$status = \userFacade::saveUser($request);
-			array_push($message,$status);
-			return view('home/home')->with('message',$message);
+			return $status;
 		}catch(Exception $e){
-			array_push($error,"Ocurrio un error al guardar información");
-			return redirect('home/home')->with('errors',$error);
+			return "error";
 		}	
 	}
 

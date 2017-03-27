@@ -126,7 +126,7 @@
 									<div class="form-group">
 										<label class="col-xs-12 col-md-4">Comunidad</label>
 										<div class="col-xs-12 col-md-8">
-											<input type="text" required class="form-control input-sm " name="comunidad" id="comunidad">
+											<input type="text" class="form-control input-sm " name="comunidad" id="comunidad">
 										</div>
 									</div>									
 									<div class="form-group">
@@ -146,25 +146,25 @@
 									<div class="form-group">
 										<label class="col-xs-12 col-md-4">Numero</label>
 										<div class="col-xs-12 col-md-8">
-											<input type="text" required class="form-control input-sm" name="num" id="num">
+											<input type="text" class="form-control input-sm" name="num" id="num">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-xs-12 col-md-4">Piso</label>
 										<div class="col-xs-12 col-md-8">
-											<input type="text" required class="form-control input-sm" name="piso" id="piso">
+											<input type="text" class="form-control input-sm" name="piso" id="piso">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-xs-12 col-md-4">Esc</label>
 										<div class="col-xs-12 col-md-8">
-											<input type="text" required class="form-control input-sm" name="esc" id="esc">
+											<input type="text" class="form-control input-sm" name="esc" id="esc">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-xs-12 col-md-4">Puerta</label>
 										<div class="col-xs-12 col-md-8">
-											<input type="text" required class="form-control input-sm" name="puerta" id="puerta">
+											<input type="text" class="form-control input-sm" name="puerta" id="puerta">
 										</div>
 									</div>
 									<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -192,12 +192,33 @@
 				<div class="modal-content">
 					<div class="modal-header text-center">
 						<h5 class="txt-tittle color-black" id="exampleModalLongTitle">Ubicaciones Cercanas</h5>
-						<div id="content-ubicaciones-cercanas">
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12">
+								<div id="content-ubicaciones-cercanas" ></div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
-						</div>
+		<div id="confirm_delete"  class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h5 class="txt-tittle color-black" id="exampleModalLongTitle">Eliminar ubicación</h5>
+					</div>
+					<div class="modal-body">
+						<p>Desela eliminar la ubicación?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-dismiss="modal" class="btn btn-primary" id="confirmOk">Eliminar</button>
+						<button type="button" data-dismiss="modal" class="btn" id="confirmCancel">No</button>
 					</div>
 				</div>
 			</div>

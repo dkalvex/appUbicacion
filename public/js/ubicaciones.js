@@ -60,11 +60,21 @@ function getUbicacionesCercanas(id,form){
 function updateDivUbicacionesCercanas(id,ubs){
 	var container_modules = $('#content-ubicaciones-cercanas');
 	var ubiValues;
+	var distancia;
 	container_modules.empty();
-	if(ubs == undefined){
+	if(ubs == undefined && ubs.length > 0){
 		return false;
 	}
-	for (var i = 0; i <= ubs.length -1;i++) {		
+	for (var i = 0; i <= ubs.length -1;i++) {
+		
+		distancia = ubs[i].distancia;
+		if(distancia > 1000){
+			distancia = distancia / 1000
+			distancia = parseFloat(distancia).toFixed(2) +" KM ";
+		}else{
+			distancia = parseFloat(distancia).toFixed(2) +" M ";
+		}
+
 		var ubi = $(document.createElement('div'));
 		ubi.attr('class','col-xs-12 col-sm-12 col-md-12');
 
@@ -78,7 +88,7 @@ function updateDivUbicacionesCercanas(id,ubs){
 		var link = $(document.createElement('a'));
 		link.attr("href", '#');
 		
-		link.append("<i class='glyphicon glyphicon-record'> "+ubs[i].direccion+" , "+ubs[i].num+" , "+ubs[i].ciudad+" , "+ubs[i].pais+" - "+ubs[i].distancia+"Km</i>");
+		link.append("<i class='glyphicon glyphicon-record'> "+ubs[i].direccion+" , "+ubs[i].num+" , "+ubs[i].ciudad+" , "+ubs[i].pais+" - "+distancia+"</i>");
 		ubiDiv3.append(link);		
 		
 		ubiDiv2.append(ubiDiv3);
@@ -98,6 +108,32 @@ function validateSession() {
 		}
 	}); 
 }
+
+$("#NewUser-form").submit(function( event ) {
+	event.preventDefault();
+	var valueForm = $("#NewUser-form").serializeArray();
+	
+	$.ajax({
+		url: APP_URL+'/user/newSave',
+		type: "post",
+		data: valueForm,
+		success: function(data){
+			if(data == "true"){
+				alertShow("#alert_model","El usuario fue creado correctamente");
+				location.reload();
+				$("#formUsuario").modal('toggle');
+			}else if(data == "false"){
+				alertShow("#alert_model_register","El usuario ya esta registrado");
+			}else if(data == "error"){
+				alertShow("#alert_model_register","Error al tratar de procesar la informacion");
+			}			
+		},
+		error: function(xhr, textStatus, errorThrown){
+			alertShow("#alert_model_register","Error al tratar de procesar la informacion");
+		}
+	});
+	
+});
 
 $("#resetPsdForm").submit(function( event ) {
 	event.preventDefault();
@@ -140,10 +176,15 @@ $("#ubicacionForm").submit(function( event ) {
 
 $("#ubicacionForm-edit").submit(function( event ) {
 	event.preventDefault();
+	editMap = false;
 	var valueForm = $("#ubicacionForm-edit").serializeArray();
 	saveUbicacion(valueForm);
 	$("#formUbicacion-edit").modal('toggle');
 
+});
+
+$("#btnCerrarEditUb").click(function( event ) {
+	editMap = false;
 });
 
 function getUbicaciones(idUser) {
@@ -231,7 +272,7 @@ function updateDivUbicaciones(id,ubs,buttons){
 $('#btUpdateL').click(function () {
 	getL = true;
 	$("#formUbicacion-edit").modal('toggle');
-})
+});
 
 function editUbicacion(ubi){
 	var i = 0, strLength = ubi.length;
@@ -261,19 +302,29 @@ function editUbicacion(ubi){
 	map.setCenter(myLatlng);
 	map.panBy(0, -150);
 }
+
 function deleteUbicacion(id){
-	$.ajax({
-		url: APP_URL+'/ubicacion/daleteUbicaciones',
-		type: "post",
-		data: {
-			"idUbicacion":id,
-			'_token': $('#token').val()
-		},
-		success: function(data){
-			validateSession();	             
-		}
+
+	$('#confirm_delete').modal({
+		backdrop: 'static',
+		keyboard: false
+	})
+	.one('click', '#confirmOk', function(e) {
+		$.ajax({
+			url: APP_URL+'/ubicacion/daleteUbicaciones',
+			type: "post",
+			data: {
+				"idUbicacion":id,
+				'_token': $('#token').val()
+			},
+			success: function(data){
+				validateSession();	             
+			}
+		});
 	});
-}
+
+};
+
 function loadUbicacion(id,lat,long) {
 	var myLatlng = new google.maps.LatLng(parseFloat(lat),parseFloat(long));
 
@@ -285,6 +336,7 @@ function loadUbicacion(id,lat,long) {
 	map.setCenter(myLatlng);
 	getUbicacionesCercanas(id,false);
 }
+
 function saveUbicacion(data) {
 	if(idUsuario != null && idUsuario != "")
 	{
@@ -293,9 +345,16 @@ function saveUbicacion(data) {
 			type: "post",
 			data: data,
 			success: function(data){
-				alertShow("#alert_model","La ubicación fue guardada exitosamente");
-				validateSession();
-				getUbicacionesCercanas(data,true);	             
+				if(data == "false"){
+					alertShow("#alert_model","Ha sobrepasado los limites de las ubicaciones");	
+				}else if (data == "error"){
+					alertShow("#alert_model","Error al guardar las ubicaciones");	
+				}else{
+					alertShow("#alert_model","Ubicación guardada correctamente");
+					validateSession();
+					getUbicacionesCercanas(data,true);	
+				}
+
 			}
 		}); 	
 	}else{

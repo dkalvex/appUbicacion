@@ -21,13 +21,13 @@ class CreateUbicacionesTable extends Migration
             $table->decimal('long', 10, 7);
             $table->decimal('lat', 10, 7);
             $table->string('pais');
-            $table->string('comunidad');
+            $table->string('comunidad')->nullable();
             $table->string('ciudad');
             $table->string('direccion');
-            $table->string('num');
-            $table->string('piso');
-            $table->string('esc');
-            $table->string('puerta');
+            $table->string('num')->nullable();
+            $table->string('piso')->nullable();
+            $table->string('esc')->nullable();
+            $table->string('puerta')->nullable();
             $table->timestamps();
         });
     }

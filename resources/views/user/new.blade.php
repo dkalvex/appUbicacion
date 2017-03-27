@@ -40,6 +40,9 @@
 				</div>
 			</div>
 		</div>
+		<div clas="col-xs-12 col-sm-12 col-md-12">
+			<div class='alert alert-danger' id="alert_model_register" style="display:none"></div>
+		</div>
 	</div>
 	<div class="modal-footer">
 		<button id="btnGuardarUser" class="btn btn-primary btn-full" disabled>Guardar</button>

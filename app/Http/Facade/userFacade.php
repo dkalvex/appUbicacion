@@ -11,9 +11,11 @@ class userFacade extends Facade{
 		$user = DB::table('users')->where('users.id_faceboock',$request->input('id'))->get();
 		
 		if(count($user)> 0){
+			$propiedades = DB::table('propiedades')->where('propiedades.nombre', 'NumMaxUbiXUser')->get();
 			$request->session()->put('user.id',$user[0]->id);
 			$request->session()->put('user.nombre',$user[0]->nombre);
 			$request->session()->put('user.apellido',$user[0]->apellido);
+			$request->session()->put('user.maxUbi',$propiedades[0]->valor);
 		}
 		return $user;
 	}
@@ -42,8 +44,9 @@ class userFacade extends Facade{
 			$request->session()->put('user.id',$user->id);
 			$request->session()->put('user.nombre',$user->nombre);
 			$request->session()->put('user.apellido',$user->apellido);
-
 		}
+		$propiedades = DB::table('propiedades')->where('propiedades.nombre', 'NumMaxUbiXUser')->get();
+		$request->session()->put('user.maxUbi',$propiedades[0]->valor);
 	}
 
 	public static function saveUser($request)
@@ -51,7 +54,7 @@ class userFacade extends Facade{
 		$user= array();
 		$user = DB::table('users')->where('users.email', $request->input('email'))->get();
 		if(count($user)>0){
-			return "El usuario ya esta registrado";
+			return "false";
 		}else{
 			$user = new User;
 			$user->nombre = $request->input('nombre');
@@ -64,7 +67,7 @@ class userFacade extends Facade{
 		$request->session()->put('user.id',$user->id);
 		$request->session()->put('user.nombre',$user->nombre);
 		$request->session()->put('user.apellido',$user->apellido);
-		return "Su usuario ha sido registrado";
+		return "true";
 	}
 
 	public static function resetPsd($request)
