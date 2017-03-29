@@ -48,7 +48,6 @@ map.addListener('click', function(event) {
 
 function addMarker(location) {	
 	marker.setPosition(location);
-	map.setCenter(location);
 }
 
 // Se crea el input y se configura como el buscar 

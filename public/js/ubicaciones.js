@@ -183,9 +183,9 @@ $("#ubicacionForm-edit").submit(function( event ) {
 
 });
 
-$("#btnCerrarEditUb").click(function( event ) {
-	editMap = false;
-});
+$('#formUbicacion-edit').on('hidden.bs.modal', function () {
+   editMap = false;
+})
 
 function getUbicaciones(idUser) {
 	if(idUser != "" && idUser != undefined)
@@ -205,6 +205,8 @@ function getUbicaciones(idUser) {
 }
 
 $('#btnConfirm').click(function () {
+	var l = new google.maps.LatLng($('#lat').val(), $('#lng').val());
+	map.setCenter(l);
 	map.panBy(0, -150);
 })
 
